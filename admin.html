@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ヨガコンシェルジュ ヒアリングフォーム</title>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>
+    (function(){
+      emailjs.init("ZfInf54MT_hVBNjjw");
+    })();
+
+    function sendEmail(e) {
+      e.preventDefault();
+      emailjs.sendForm('service_rjbnypg', 'template_qwwm60v', e.target)
+        .then(function() {
+          alert('送信が完了しました。ありがとうございました。');
+          e.target.reset();
+        }, function(error) {
+          alert('送信に失敗しました。時間をおいて再度お試しください。');
+          console.log(error);
+        });
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Segoe UI', 'Noto Sans JP', sans-serif;
+      background-color: #f4f7f9;
+      margin: 0;
+      padding: 1em;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: #ffffff;
+      padding: 2em;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+      border-radius: 12px;
+    }
+    h1 {
+      font-size: 1.8em;
+      color: #2c3e50;
+      text-align: center;
+      margin-bottom: 0.5em;
+    }
+    p {
+      text-align: center;
+      margin-bottom: 2em;
+      color: #555;
+    }
+    form label {
+      font-weight: bold;
+      display: block;
+      margin-top: 1.2em;
+      margin-bottom: 0.4em;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 0.75em;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1em;
+    }
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5em 1em;
+    }
+    .checkbox-group label {
+      font-weight: normal;
+      margin-bottom: 0;
+    }
+    .checkbox-group input[type="checkbox"] {
+      margin-right: 0.5em;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 0.75em 2em;
+      border: none;
+      border-radius: 4px;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 2em;
+    }
+    button:hover {
+      background-color: #43a047;
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 0.5em;
+      }
+      input, textarea, select, button {
+        font-size: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>ヨガコンシェルジュ ヒアリングフォーム</h1>
+    <p>以下のフォームにご記入ください。内容をもとにスケジュールと見積りをご提案いたします。</p>
+    <form onsubmit="sendEmail(event)">
+      <label>団体名</label>
+      <input type="text" name="organization" required>
+
+      <label>担当者名</label>
+      <input type="text" name="contact_name" required>
+
+      <label>希望リリース日</label>
+      <input type="text" name="release_date">
+
+      <label>サイトの概要</label>
+      <textarea name="site_description" rows="3"></textarea>
+
+      <label>ターゲットユーザー</label>
+      <input type="text" name="target_users">
+
+      <label>実装したい機能（複数選択可）</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="features" value="NEWS機能">NEWS機能</label>
+        <label><input type="checkbox" name="features" value="地図検索・表示・予約">地図検索・表示・予約</label>
+        <label><input type="checkbox" name="features" value="住所検索・予約">住所検索・予約</label>
+        <label><input type="checkbox" name="features" value="分類検索">分類検索（レベル・スタイル）</label>
+        <label><input type="checkbox" name="features" value="ユーザー登録機能">ユーザー/イベント登録機能</label>
+        <label><input type="checkbox" name="features" value="マイページ">マイページ・レビュー・通知</label>
+      </div>
+
+      <label>ご希望のデザイン雰囲気</label>
+      <select name="design_preference">
+        <option value="simple">シンプル</option>
+        <option value="premium">高級感</option>
+        <option value="natural">ナチュラル</option>
+        <option value="modern">モダン</option>
+      </select>
+
+      <label>参考サイトURL</label>
+      <input type="text" name="reference_sites">
+
+      <label>ご予算</label>
+      <input type="text" name="budget">
+
+      <label>ドメイン・サーバーの準備状況</label>
+      <select name="infra_status">
+        <option value="準備済">準備済</option>
+        <option value="未取得">未取得</option>
+        <option value="検討中">検討中</option>
+      </select>
+
+      <label>ログインが必要な対象</label>
+      <select name="login_scope">
+        <option value="ユーザー">ユーザー</option>
+        <option value="インストラクター">インストラクター</option>
+        <option value="運営管理者">運営管理者</option>
+        <option value="その他">その他</option>
+      </select>
+
+      <label>備考・ご要望</label>
+      <textarea name="notes" rows="4"></textarea>
+
+      <button type="submit">送信</button>
+    </form>
+  </div>
+</body>
+</html>
+
+
