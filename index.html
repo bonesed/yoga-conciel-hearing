@@ -6,26 +6,19 @@
   <title>ヨガコンシェルジュ ヒアリングフォーム</title>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script>
-    (function() {
+    (function () {
       emailjs.init("ZfInf54MT_hVBNjjw");
     })();
 
     function sendEmail(e) {
       e.preventDefault();
-
-      // チェックボックスをカンマ区切りで取得
-      const features = [...document.querySelectorAll('input[name="features[]"]:checked')]
-        .map(el => el.value)
-        .join(', ');
-      document.getElementById("combined-features").value = features;
-
       emailjs.sendForm('service_rjbnypg', 'template_qwwm60v', e.target)
-        .then(() => {
+        .then(function () {
           alert('送信が完了しました。ありがとうございました。');
           e.target.reset();
-        }, (error) => {
+        }, function (error) {
           alert('送信に失敗しました。時間をおいて再度お試しください。');
-          console.error(error);
+          console.log('送信エラー:', error);
         });
     }
   </script>
@@ -41,19 +34,18 @@
       margin: auto;
       background: #ffffff;
       padding: 2em;
-      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
       border-radius: 12px;
     }
     h1 {
       font-size: 1.8em;
       color: #2c3e50;
       text-align: center;
-      margin-bottom: 0.5em;
     }
     p {
       text-align: center;
-      margin-bottom: 2em;
       color: #555;
+      margin-bottom: 2em;
     }
     form label {
       font-weight: bold;
@@ -75,6 +67,7 @@
     }
     .checkbox-group label {
       font-weight: normal;
+      margin-bottom: 0;
     }
     .checkbox-group input[type="checkbox"] {
       margin-right: 0.5em;
@@ -96,9 +89,6 @@
       body {
         padding: 0.5em;
       }
-      input, textarea, select, button {
-        font-size: 1em;
-      }
     }
   </style>
 </head>
@@ -108,30 +98,29 @@
     <p>以下のフォームにご記入ください。内容をもとにスケジュールと見積りをご提案いたします。</p>
     <form onsubmit="sendEmail(event)">
       <label>団体名</label>
-      <input type="text" name="organization" required />
+      <input type="text" name="organization" required>
 
       <label>担当者名</label>
-      <input type="text" name="contact_name" required />
+      <input type="text" name="contact_name" required>
 
       <label>希望リリース日</label>
-      <input type="text" name="release_date" />
+      <input type="text" name="release_date">
 
       <label>サイトの概要</label>
       <textarea name="site_description" rows="3"></textarea>
 
       <label>ターゲットユーザー</label>
-      <input type="text" name="target_users" />
+      <input type="text" name="target_users">
 
       <label>実装したい機能（複数選択可）</label>
       <div class="checkbox-group">
-        <label><input type="checkbox" name="features[]" value="NEWS機能">NEWS機能</label>
-        <label><input type="checkbox" name="features[]" value="地図検索・表示・予約">地図検索・表示・予約</label>
-        <label><input type="checkbox" name="features[]" value="住所検索・予約">住所検索・予約</label>
-        <label><input type="checkbox" name="features[]" value="分類検索">分類検索（レベル・スタイル）</label>
-        <label><input type="checkbox" name="features[]" value="ユーザー登録機能">ユーザー/イベント登録機能</label>
-        <label><input type="checkbox" name="features[]" value="マイページ">マイページ・レビュー・通知</label>
+        <label><input type="checkbox" name="features" value="NEWS機能">NEWS機能</label>
+        <label><input type="checkbox" name="features" value="地図検索・表示・予約">地図検索・表示・予約</label>
+        <label><input type="checkbox" name="features" value="住所検索・予約">住所検索・予約</label>
+        <label><input type="checkbox" name="features" value="分類検索">分類検索（レベル・スタイル）</label>
+        <label><input type="checkbox" name="features" value="ユーザー登録機能">ユーザー/イベント登録機能</label>
+        <label><input type="checkbox" name="features" value="マイページ">マイページ・レビュー・通知</label>
       </div>
-      <input type="hidden" name="features" id="combined-features" />
 
       <label>ご希望のデザイン雰囲気</label>
       <select name="design_preference">
@@ -142,10 +131,10 @@
       </select>
 
       <label>参考サイトURL</label>
-      <input type="text" name="reference_sites" />
+      <input type="text" name="reference_sites">
 
       <label>ご予算</label>
-      <input type="text" name="budget" />
+      <input type="text" name="budget">
 
       <label>ドメイン・サーバーの準備状況</label>
       <select name="infra_status">
